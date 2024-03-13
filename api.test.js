@@ -75,5 +75,19 @@ describe('test Books API', () => {
             })
     })
 
+    it('should delete book', (done) => {
+        chai.request(server)
+            .delete(`/books/${bookId}`)
+            .end((err, res) => {
+                if(err){
+                    return done()
+                }
+                expect(res).to.have.status(204)
+                done()
+            })
+    })
+
+    it('')
+
 })
 
