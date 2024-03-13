@@ -87,7 +87,38 @@ describe('test Books API', () => {
             })
     })
 
-    it('')
+    it('should return 404 when trying to GET, PUT or DELETE a non-existing book', (done) =>{
+        const noExistingBook = {id: "9999", title: "No Exist", author: 'No Exist'}
+        chai.request(server)
+            .get('/books/999')
+            .end((err, res) => {
+                if(err){
+                    return done()
+                }
+                expect(res).to.have.status(404);
+            })
+
+        chai.request(server)
+            .post('/books/999')
+            .send(noExistingBook)
+            .end((err, res) => {
+                if(err){
+                    return done()
+                }
+                expect(res).to.have.status(404);
+            })
+
+        chai.request(server)
+            .delete('/books/999')
+            .end((err, res) => {
+                if(err){
+                    return done()
+                }
+                expect(res).to.have.status(404);
+            })
+
+            done()
+    })
 
 })
 
