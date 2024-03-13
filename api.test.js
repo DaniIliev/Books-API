@@ -44,5 +44,18 @@ describe('test Books API', () => {
             })
     })
 
+    it('should get all books', (done) => {
+        chai.request(server)
+            .get('/books')
+            .end((err,res) => {
+                if(err){
+                    return done();
+                }
+                expect(res.body).to.be.an('array')
+                expect(res).to.have.status(200);
+                done()
+            })
+    })
+
 })
 
