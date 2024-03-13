@@ -28,5 +28,21 @@ describe('test Books API', () => {
             });
     })
 
+    it('should get a book by id', (done) => {
+        chai.request(server)
+            .get(`/books/${bookId}`)
+            .end((err, res) => {
+                if(err){
+                    return done()
+                }
+                expect(res).to.have.status(200)
+                expect(res.body).to.be.a('object');
+                expect(res.body).to.have.property('id');
+                expect(res.body).to.have.property('title');
+                expect(res.body).to.have.property('author');
+                done()
+            })
+    })
+
 })
 
