@@ -57,5 +57,23 @@ describe('test Books API', () => {
             })
     })
 
+    it('should put an existing book', (done) => {
+        const updatedBook = {id: bookId, title: 'updated Book', author: 'Update Author' }
+
+        chai.request(server)
+            .put(`/books/${bookId}`)
+            .send(updatedBook)
+            .end((err,res) => {
+                if(err){
+                    return err;
+                }
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.title).to.equal(updatedBook.title);
+                expect(res.body.author).to.be.equal(updatedBook.author)
+                done()
+            })
+    })
+
 })
 
